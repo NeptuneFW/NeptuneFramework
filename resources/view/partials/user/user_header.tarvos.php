@@ -1,0 +1,5 @@
+@dynamic;
+
+    Merhaba
+
+@enddynamic;
