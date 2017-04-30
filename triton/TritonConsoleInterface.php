@@ -123,7 +123,7 @@ use \\Triton\\Triton as Triton;
 class ". ucfirst($table[0]) . "Table
 {
 
-    public static \$table_id_column = 'id'; // The name of the column that has the table ID number
+    protected static \$table_id_column = 'id'; // The name of the column that has the table ID number
     private \$where = [];
     
     public function table(\$table) 
@@ -273,22 +273,31 @@ class ". ucfirst($table[0]) . "Table
 
     public function execute() {
         \$pdoConnection = \$GLOBALS['Databases']['" . ucfirst($database) . "'];
-        \$selectQuery = \"SELECT * FROM ". $table[0] ." WHERE \" . \$this->where['first'][0] . \" \" . \$this->where['first'][1] . \" '\" . \$this->where['first'][2] . \"' \";
+        \$bind = [];
+        \$selectQuery = \"SELECT * FROM ". $table[0] ." WHERE \" . \$this->where['first'][0] . \" \" . \$this->where['first'][1] . \":first \";
+        \$bind['first'] = \$this->where['first'][2];
+        \$i = 0;
         if(isset(\$this->where['orWhere'])) 
-        {
+        {      
             foreach(\$this->where['orWhere'] as \$itemValue)
             {
-                \$selectQuery .= \"OR \" . \$itemValue[0] . \" \" . \$itemValue[1] . \" '\" . \$itemValue[2] . \"' \";
+                \$selectQuery .= \"OR \" . \$itemValue[0] . \" \" . \$itemValue[1] . \" :bind_\" . \$i . \" \";
+                \$bind['bind_' . \$i] = \$itemValue[2]; 
+                \$i++;
             }
         }
         if(isset(\$this->where['andWhere'])) 
         {
             foreach (\$this->where['andWhere'] as \$itemValue) 
             {
-                \$selectQuery .= \"AND \" . \$itemValue[0] . \" \" . \$itemValue[1] . \" '\" . \$itemValue[2] . \"' \";
+                \$selectQuery .= \"AND \" . \$itemValue[0] . \" \" . \$itemValue[1] . \" :bind_\" . \$i . \" \";
+                \$bind['bind_' . \$i] = \$itemValue[2];
+                \$i++;
             }
         }      
-        \$selectWhere = \$pdoConnection->query(\$selectQuery);
+        \$selectWhere = \$pdoConnection->prepare(\$selectQuery);
+        \$selectWhere->execute(\$bind);
+        
         if(\$selectWhere != false )
         {
             \$selectWhere = \$selectWhere->fetchAll();
@@ -486,8 +495,8 @@ class ". ucfirst($table[0]) . "Table
                 $columnString = $columns;
             }
         }
-        $selectRow = $pdoConnection->prepare("SELECT " . $columnString . " FROM " . $table . " WHERE " . $tableID . "=" . $id);
-        $selectRow->execute();
+        $selectRow = $pdoConnection->prepare("SELECT " . $columnString . " FROM " . $table . " WHERE " . $tableID . "=id");
+        $selectRow->execute([\'id\' => $id]);
         $'.$table[0].'Row = new '.$table[0].'Row();
         $i = 0;       
         $'.$table[0].'Row->triton_'.$table[0].'_id = array($id, $tableID);        
