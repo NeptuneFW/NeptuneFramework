@@ -67,9 +67,21 @@ $default_lang = explode(',', apache_request_headers()['Accept-Language']);
  * DEFAULT_LANG @define
 */
 $default_lang = explode("-", $default_lang[0]);
-define('DEFAULT_LANG', $default_lang[0] . "_" . $default_lang[1]);
+if(file_exists('languages/'. $default_lang[0] . "_" . $default_lang[1] . ".nt"))
+{
+    define('DEFAULT_LANG', $default_lang[0] . "_" . $default_lang[1]);
+    \Libs\Languages::setDefault(DEFAULT_LANG);
 
-\Libs\Languages::setDefault(DEFAULT_LANG);
+}
+else
+{
+    define('DEFAULT_LANG', "tr_TR");
+    if(file_exists('languages/'. DEFAULT_LANG . ".nt"))
+    {
+        \Libs\Languages::setDefault(DEFAULT_LANG);
+    }
+}
+
 \System\Application::set("development", "/development", "ip", array("127.0.0.1", "::1"));
 \System\Application::set("admin", "/admin", 'public', '');
 \System\Application::end();
