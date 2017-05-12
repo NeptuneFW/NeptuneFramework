@@ -4,11 +4,10 @@
             "System\\": "system",
             "Libs\\": "libs",
             "Triton\\": "triton",
-            "Tarvos\\": "tarvos",
             "Database\\" : "database"
         }
     },
     "require": {
-        "phpmailer/phpmailer": "^5.2"
+        "duncan3dc/blade": "^3.4"
     }
 }

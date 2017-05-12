@@ -420,6 +420,10 @@ class Route
         {
             preg_match('/app\\\\(\\w+)\\\\/',debug_backtrace()[4]['file'], $app);
         }
+        if(empty($app))
+        {
+            $app[1] = debug_backtrace()[0]['object']->app;
+        }
         $app = $app[1];
         $this->app = $app;
         $this->url = $this->nicknames[$nickname];

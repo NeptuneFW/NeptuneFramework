@@ -1,6 +1,6 @@
 <?php
-$settings = array(
-    "host" => "localhost",
-    "user" => "root",
-    "pass" => ""
-);
+$settings = [
+    'host' => 'localhost',
+    'user' => 'root',
+    'pass' => ''
+];

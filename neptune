@@ -4,327 +4,272 @@
 
 define('DS', DIRECTORY_SEPARATOR);
 define('ROOT', realpath('.'));
-define('BASE_URL', "http://neptune.dev");
-define('DEFAULT_APP', "production");
+define('BASE_URL', 'http://localhost:82/neptune');
+define('DEFAULT_APP', 'production');
 
 if($argv[1] == '--controller')
 {
-    $controller = ucfirst($argv[2]);
-    $class = '<?php
-class ' . $controller . ' extends Controller
+  $controller = ucfirst($argv[2]);
+  $class = '<?php
+namespace App\Production\Http\Controller;
+
+class ' . $controller . '
 {
-    public function index()
-    {
-        // Your controller code..
-    }
-    public function show()
-    {
-        // Your controller code..
-    }
-    public function create()
-    {
-        // Your controller code..
-    }
-    public function update($id)
-    {
-        // Your controller code..
-    }
-    public function delete($id)
-    {
-        // Your controller code..
-    }
+  public function index()
+  {
+    // Your controller code..
+  }
+  public function show()
+  {
+    // Your controller code..
+  }
+  public function create()
+  {
+    // Your controller code..
+  }
+  public function update($id)
+  {
+    // Your controller code..
+  }
+  public function delete($id)
+  {
+    // Your controller code..
+  }
 }';
-    $dt = fopen(ROOT . DS . 'app\http\controller' . DS . $argv[2] . '.php', 'w');
-    fwrite($dt, $class);
-    fclose($dt);
-    echo ROOT . DS . 'app\http\controller' . DS . $argv[2] . '.php file created succesfully.';
+  $dt = fopen(ROOT . DS . 'app\production\http\controller' . DS . $argv[2] . '.php', 'w');
+  fwrite($dt, $class);
+  fclose($dt);
+  echo ROOT . DS . 'app\production\http\controller' . DS . $argv[2] . '.php file created succesfully.';
 }
 else if($argv[1] == '--model')
 {
     $model = ucfirst($argv[2]);
     $class='<?php
-class ' . $model . ' extends Model
+namespace Database\Model;
+
+class ' . $model . '
 {
-    public function __construct()
-    {
-        parent::__construct();
-    }
-    public function show($table)
-    {
-        $db = $this->db;
-        return $db->select($table)
-                  ->run();
-        }
+  public function show($table)
+  {
+    // Your model codes..
+  }
 }';
-    $dt = fopen(ROOT . DS . 'database\model' . DS . $argv[2] . '.php', 'w');
-    fwrite($dt, $class);
-    fclose($dt);
-    echo ROOT . DS . 'database\model' . DS . $argv[2] . '.php file created succesfully.';
+  $dt = fopen(ROOT . DS . 'database\model' . DS . $argv[2] . '.php', 'w');
+  fwrite($dt, $class);
+  fclose($dt);
+  echo ROOT . DS . 'database\model' . DS . $argv[2] . '.php file created succesfully.';
 }
-else if($argv[1] == 'create:application')
+else if($argv[1] == '--secret')
 {
-
-    if(isset($argv[2]) && !empty($argv[2]))
+    $characters = "1234567890abcdefghijKLMNOPQRSTuvwxyzABCDEFGHIJklmnopqrstUVWXYZ0987654321!+%+^&%/)(=%[$#]{}*-+_#.:;<>@";
+    $pass = '';
+    for($i=0;$i<50;$i++)
     {
-
-        $application = $argv[2];
-
-        if(is_dir('app/' . $application))
-        {
-
-            echo "This application already exists.";
-
-        } else {
-
-            mkdir('app/' . $application);
-            mkdir('app/' . $application . '/config');
-            $configAppFileString = '<?php
-    namespace '.$application.';
-    class App
-    {
-        protected $controller   = \'home\';
-        protected $method       = \'index\';
-        const THIS_APP = "'.$application.'";
-    
-        public function __construct()
-        {
-    
-            $databases = glob("database/databases/*");
-    
-            foreach ($databases as $database) {
-    
-                $connectionSettings = file_get_contents($database . "/connection.ntconfig");
-                eval("\$connectionSettings = " . $connectionSettings );
-    
-    
-                $databaseName = explode("/", $database);
-                $databaseName = end($databaseName);
-    
-                $GLOBALS[\'Databases\'][$databaseName] = new \PDO("mysql:host=". $connectionSettings[\'host\'] .";dbname=" . $databaseName . ";charset=utf8", $connectionSettings[\'user\'], $connectionSettings[\'pass\']);
-    
-            }
-    
-    
-            $url = isset($_GET[\'url\']) ? $_GET[\'url\'] : null;
-            $url = rtrim($url, \'/\');
-            $url = explode(\'/\', $url);
-            if (empty($url[0]))
-            {
-                require __DIR__ .\'/../http/controller/\' . $this->controller . \'.php\';
-                $method = $this->method;
-                $ctrl = new $this->controller();
-                $ctrl->$method();
-                return false;
-            }
-            $this->controller = $url[0];
-            $file = \'app/http/controller/\' . $this->controller . \'.php\';
-            if (file_exists($file))
-            {
-                require $file;
-            }
-            else
-            {
-                ErrorHandler::page404();
-                return false;
-            }
-            $this->controller = new $url[0];
-            if (isset($url[2]))
-            {
-                if (method_exists($this->controller ,$url[1]))
-                {
-                    $this->controller->{$url[1]}($url[2]);
-                }
-                else
-                {
-                    ErrorHandler::page404();
-                    return false;
-                }
-            }
-            else
-            {
-                if (isset($url[1]))
-                {
-                    if (!method_exists($this->controller ,$url[1]))
-                    {
-                        ErrorHandler::page404();
-                    }
-                    else
-                    {
-                        $this->controller->{$url[1]}();
-                    }
-                }
-                else if (empty($url[1]))
-                {
-                    $method = $this->method;
-                    $this->controller->$method();
-                }
-            }
-        }
-    }';
-            file_put_contents('app/' . $application . '/config/app.php', $configAppFileString);
-            file_put_contents('app/' . $application . '/config/classes.php', '<?php
-    trait Classes
-    {
-        public function __construct()
-        {
-            
-        }
-    }');
-            mkdir('app/' . $application . '/http');
-            mkdir('app/' . $application . '/http/controller');
-            mkdir('app/' . $application . '/http/middleware');
-            mkdir('app/' . $application . '/http/router');
-
-        }
-
+        $pass .= $characters{rand() % strlen($characters)};
     }
-
+    $secret = $pass;
+    if(file_exists('secret.php'))
+    {
+        unlink('secret.php');
+        file_put_contents('secret.php', '<?php 
+        define(\'SECRET\',\''. $secret .'\'); ');
+    }
+    else
+    {
+        file_put_contents('secret.php', '<?php 
+        define(\'SECRET\',\''. $secret .'\'); ');
+    }
 }
-else if($argv[1] == 'create:sitemap')
+else if($argv[1] == '--application')
 {
+  if(isset($argv[2]) && !empty($argv[2]))
+  {
+    $application = $argv[2];
 
-    if(!isset($argv[2]) || empty($argv[2]))
+    if(is_dir('app/' . $application))
     {
-        die("Please Please enter the second parameter to indicate your application.");
+      echo 'This application already exists.';
     }
-
-    if($argv[2] == 'all')
+    else
     {
-        require 'System/Route.core.php';
-        $routers = glob("app/*/http/router/*");
-        $xml = new XMLWriter();
-        $xml->openMemory();
-        $xml->startDocument('1.0', "UTF-8");
-        $xml->startElementNS(null,"urlset", "http://www.sitemaps.org/schemas/sitemap/0.9");
-        foreach ($routers as $router)
+      mkdir('app/' . $application);
+      mkdir('app/' . $application . '/config');
+      file_put_contents('app/' . $application . '/config/app.php', $configAppFileString);
+      file_put_contents('app/' . $application . '/config/classes.php', '<?php
+trait Classes
+{
+  public function __construct()
+  {
+    // Your trait codes...
+  }
+}');
+      mkdir('app/' . $application . '/http');
+      mkdir('app/' . $application . '/http/controller');
+      mkdir('app/' . $application . '/http/middleware');
+      mkdir('app/' . $application . '/http/router');
+    }
+  }
+}
+else if($argv[1] == '--sitemap')
+{
+  if(!isset($argv[2]) || empty($argv[2]))
+  {
+    die('Please Please enter the second parameter to indicate your application.');
+  }
+  if($argv[2] == 'all')
+  {
+    require 'system/route.php';
+    $routers = glob("app/*/http/router/*");
+    $xml = new XMLWriter();
+    $xml->openMemory();
+    $xml->startDocument('1.0', "UTF-8");
+    $xml->startElementNS(null,"urlset", "http://www.sitemaps.org/schemas/sitemap/0.9");
+    foreach ($routers as $router)
+    {
+      $route = new System\Route(true);
+      preg_match("/app\\/(.*)\\/http/", $router, $app);
+      array_shift($app);
+      $app = $app[0];
+      require  $router;
+      foreach($route->sitemaps as $route)
+      {
+        if(count($route) == 1)
         {
-            $route = new Route(true);
-            preg_match("/app\\/(.*)\\/http/", $router, $app);
-            array_shift($app);
-            $app = $app[0];
-            require  $router;
-            foreach($route->sitemaps as $route)
-            {
-                if(count($route) == 1)
-                {
-                    $sitemapurl = $route['url'];
-                    foreach ($row as $column => $rowValue) {
-                        $sitemapurl = preg_replace('/\\{' . $column . '}/', urldecode($rowValue), $sitemapurl);
-                    }
-                    $sitemapurl2 = BASE_URL . '/' . $app . $sitemapurl;
-                    if ($app == DEFAULT_APP) {
-                        $sitemapurl3 = BASE_URL . $sitemapurl;
-                        $xml->startElement("url");
-                        $xml->startElement("loc");
-                        $xml->text($sitemapurl3);
-                        $xml->endElement();
-                        $xml->endElement();
-                    }
-                    $xml->startElement("url");
-                    $xml->startElement("loc");
-                    $xml->text($sitemapurl2);
-                    $xml->endElement();
-                    $xml->endElement();
-                }
-                else {
-                    $connections = array();
-                    foreach ($route['columns'] as $columnKey => $columnValue) {
-                        $var = explode(".", $columnValue);
-                        $database = $var[0];
-                        $table = $var[1];
-                        $column = $var[2];
-                        $connections[$database][$table][] = $column;
-                    }
-                    foreach ($connections as $database => $table) {
-                        $connection = file_get_contents("database/databases/" . ucfirst($database) . '/connection.ntconfig');
-                        eval("\$connection = " . $connection);
-                        $pdo = new \PDO("mysql:host=" . $connection['host'] . ";dbname=" . $database . ";charset=UTF8", $connection['user'], $connection['pass']);
-                        foreach ($table as $table => $columns) {
-                            $queryColumn = '';
-                            foreach ($columns as $column) {
-                                $queryColumn .= $column . ",";
-                            }
-                            if (!empty($route['lastmod'])) $queryColumn .= $route['lastmod'] . ",";
-                            if (!empty($route['changefreg'])) $queryColumn .= $route['changefreg'] . ",";
-                            $queryColumn = rtrim($queryColumn, ',');
-                            if (empty($route['if'])) {
-                                $where = "";
-                            } else {
-                                $where = " WHERE " . $route['if'];
-                            }
-                            $rows = $pdo->query("SELECT " . $queryColumn . " FROM `" . $table . "`" . $where, PDO::FETCH_ASSOC);
-                            $rows = $rows->fetchAll(2);
-                            foreach ($rows as $row) {
-                                $sitemapurl = $route['url'];
-                                foreach ($row as $column => $rowValue) {
-                                    $sitemapurl = preg_replace('/\\{' . $column . '}/', urldecode($rowValue), $sitemapurl);
-                                }
-                                $sitemapurl2 = BASE_URL . '/' . $app . $sitemapurl;
-                                if ($app == DEFAULT_APP) {
-                                    $sitemapurl3 = BASE_URL . $sitemapurl;
-                                    $xml->startElement("url");
-                                    $xml->startElement("loc");
-                                    $xml->text($sitemapurl3);
-                                    $xml->endElement();
-                                    if (!empty($route['lastmod'])) {
-                                        $xml->startElement("lastmod");
-                                        $xml->text($row[$route['lastmod']]);
-                                        $xml->endElement();
-                                    }
-                                    if (!empty($route['changefreg'])) {
-                                        $xml->startElement("changefreg");
-                                        $xml->text($row[$route['changefreg']]);
-                                        $xml->endElement();
-                                    }
-                                    $xml->startElement("priority");
-                                    $xml->text($route['priority']);
-                                    $xml->endElement();
-                                    $xml->endElement();
-                                }
-                                $xml->startElement("url");
-                                $xml->startElement("loc");
-                                $xml->text($sitemapurl2);
-                                $xml->endElement();
-                                if (!empty($route['lastmod'])) {
-                                    $xml->startElement("lastmod");
-                                    $xml->text($row[$route['lastmod']]);
-                                    $xml->endElement();
-                                }
-                                if (!empty($route['changefreg'])) {
-                                    $xml->startElement("changefreg");
-                                    $xml->text($row[$route['changefreg']]);
-                                    $xml->endElement();
-                                }
-                                $xml->startElement("priority");
-                                $xml->text($route['priority']);
-                                $xml->endElement();
-                                $xml->endElement();
-                            }
-                        }
-                    }
-                }
-            }
+          $sitemapurl = $route['url'];
+          foreach ($row as $column => $rowValue) {
+            $sitemapurl = preg_replace('/\\{' . $column . '}/', urldecode($rowValue), $sitemapurl);
+          }
+          $sitemapurl2 = BASE_URL . '/' . $app . $sitemapurl;
+          if ($app == DEFAULT_APP)
+          {
+            $sitemapurl3 = BASE_URL . $sitemapurl;
+            $xml->startElement("url");
+            $xml->startElement("loc");
+            $xml->text($sitemapurl3);
+            $xml->endElement();
+            $xml->endElement();
+          }
+          $xml->startElement("url");
+          $xml->startElement("loc");
+          $xml->text($sitemapurl2);
+          $xml->endElement();
+          $xml->endElement();
         }
-        $xml->endElement();
-        file_put_contents("sitemap.xml", $xml->flush());
+        else
+        {
+          $connections = [];
+          foreach ($route['columns'] as $columnKey => $columnValue)
+          {
+            $var = explode('.', $columnValue);
+            $database = $var[0];
+            $table = $var[1];
+            $column = $var[2];
+            $connections[$database][$table][] = $column;
+          }
+          foreach ($connections as $database => $table)
+          {
+            $connection = file_get_contents('database/databases/' . ucfirst($database) . '/connection.ntconfig');
+            eval('$connection = ' . $connection);
+            $pdo = new \PDO('mysql:host=' . $connection['host'] . ';dbname=' . $database . ';charset=UTF8', $connection['user'], $connection['pass']);
+            foreach ($table as $table => $columns)
+            {
+              $queryColumn = '';
+              foreach ($columns as $column)
+              {
+                $queryColumn .= $column . ',';
+              }
+              if (!empty($route['lastmod'])) $queryColumn .= $route['lastmod'] . ',';
+              if (!empty($route['changefreg'])) $queryColumn .= $route['changefreg'] . ',';
+              $queryColumn = rtrim($queryColumn, ',');
+              if (empty($route['if']))
+              {
+                $where = '';
+              }
+              else
+              {
+                $where = ' WHERE ' . $route['if'];
+              }
+              $rows = $pdo->query('SELECT ' . $queryColumn . ' FROM `' . $table . '`' . $where, PDO::FETCH_ASSOC);
+              $rows = $rows->fetchAll(2);
+              foreach ($rows as $row)
+              {
+                $sitemapurl = $route['url'];
+                foreach ($row as $column => $rowValue)
+                {
+                  $sitemapurl = preg_replace('/\\{' . $column . '}/', urldecode($rowValue), $sitemapurl);
+                }
+                $sitemapurl2 = BASE_URL . '/' . $app . $sitemapurl;
+                if ($app == DEFAULT_APP)
+                {
+                  $sitemapurl3 = BASE_URL . $sitemapurl;
+                  $xml->startElement('url');
+                  $xml->startElement('loc');
+                  $xml->text($sitemapurl3);
+                  $xml->endElement();
+                  if (!empty($route['lastmod']))
+                  {
+                    $xml->startElement('lastmod');
+                    $xml->text($row[$route['lastmod']]);
+                    $xml->endElement();
+                  }
+                  if (!empty($route['changefreg']))
+                  {
+                    $xml->startElement("changefreg");
+                    $xml->text($row[$route['changefreg']]);
+                    $xml->endElement();
+                  }
+                  $xml->startElement("priority");
+                  $xml->text($route['priority']);
+                  $xml->endElement();
+                  $xml->endElement();
+                }
+                $xml->startElement('url');
+                $xml->startElement('loc');
+                $xml->text($sitemapurl2);
+                $xml->endElement();
+                if (!empty($route['lastmod']))
+                {
+                  $xml->startElement("lastmod");
+                  $xml->text($row[$route['lastmod']]);
+                  $xml->endElement();
+                }
+                if (!empty($route['changefreg']))
+                {
+                  $xml->startElement('changefreg');
+                  $xml->text($row[$route['changefreg']]);
+                  $xml->endElement();
+                }
+                $xml->startElement('priority');
+                $xml->text($route['priority']);
+                $xml->endElement();
+                $xml->endElement();
+              }
+            }
+          }
+        }
+      }
     }
-
+    $xml->endElement();
+    file_put_contents("sitemap.xml", $xml->flush());
+  }
 }
 else if($argv[1] == '--middleware')
 {
-    $middleware = ucfirst($argv[2]);
-    $class='<?php
+  $middleware = ucfirst($argv[2]);
+  $class='<?php
+namespace App\Production\Http\Miccleware;
+
 class ' . $middleware . '
 {
-    public function handle()
-    {
-        // Your middleware code..
-    }
+  public function handle()
+  {
+    // Your middleware code..
+  }
 }';
-    $dt = fopen(ROOT . DS . 'app\http\middleware' . DS . $argv[2] . '.php', 'w');
-    fwrite($dt, $class);
-    fclose($dt);
-    echo ROOT . DS . 'app\http\middleware' . DS . $argv[2] . '.php file created succesfully.';
+  $dt = fopen(ROOT . DS . 'app\http\middleware' . DS . $argv[2] . '.php', 'w');
+  fwrite($dt, $class);
+  fclose($dt);
+  echo ROOT . DS . 'app\http\middleware' . DS . $argv[2] . '.php file created succesfully.';
 }
 else
 {

@@ -1,18 +1,13 @@
 <?php
-
 namespace App\Production\Http\Controller;
 
 use Libs\Connect\Connect;
-use Libs\Languages;
-use Tarvos\Tarvos;
+use duncan3dc\Laravel\Blade;
 
 class Home
 {
-    use \System\Core;
-
-	public function index()
-	{
-		echo "Neptune Framework is being developed";
-	}
-
+  public function index()
+  {
+    echo Blade::render('home');
+  }
 }

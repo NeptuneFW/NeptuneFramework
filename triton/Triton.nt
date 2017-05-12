@@ -1,5 +1,4 @@
 <?php
-
 //#!/usr/bin/php
 //#!/usr/bin/env php
 
@@ -25,21 +24,21 @@ if($argv[1] == 'create:tableFile') {
      /**
      * Created by Neptune Framework.
      * User: Triton
-     */ 
-     
-     class '.$table.'Table 
+     */
+
+     class '.$table.'Table
      {
-     
+
         public function table($table) {
-        
+
             // Write your table columns... Documentation : neptunefw.org
-        
+
             return $table;
-            
+
         }
-     
+
      }
-     
+
      ';
 
         file_put_contents('Applications/Databases/' . $database . '/' . $table . 'Table.php', $tableFileContent);

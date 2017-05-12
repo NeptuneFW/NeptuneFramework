@@ -1,5 +1,4 @@
 <?php
-
 namespace System;
 
 /**
@@ -8,6 +7,8 @@ namespace System;
  * Date: 11.04.2017
  * Time: 12:11
  */
+
+use duncan3dc\Laravel\Blade;
 
 class Application
 {
@@ -57,13 +58,13 @@ class Application
                                 } else {
                                     $routed = false;
                                     echo "
-                    
+
                     <form method='post'>
-                        
+
                         Password:
                         <input type='password' name='password'/>
                         <input type='submit'/>
-                        
+
                     </form>
                     ";
 
@@ -74,13 +75,13 @@ class Application
                                 $route = false;
 
                                 echo "
-                    
+
                     <form method='post'>
-                        
+
                         Password:
                         <input type='password' name='password'/>
                         <input type='submit'/>
-                        
+
                     </form>
                     ";
 
@@ -145,6 +146,8 @@ class Application
                     {
                         $params .= "'" . $param . "',";
                     }
+                    Blade::share('route', $route);
+
                     $params = rtrim($params, ",");
                     eval("\$class->" . $callFunc . "(". $params .");");
                 }
@@ -188,6 +191,7 @@ class Application
                     $params .= "'" . $param . "',";
                 }
                 $params = rtrim($params, ",");
+                Blade::share('route', $route);
                 eval("\$class->" . $callFunc . "(". $params .");");
             }
 
@@ -198,7 +202,7 @@ class Application
             }
 
         }
-
+        $GLOBALS['Databases'] = null;
     }
 
 }
