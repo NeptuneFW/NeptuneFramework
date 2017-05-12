@@ -16,6 +16,7 @@ And go to your project directory
 ```sh
 $ composer install
 $ composer dump-autoload -o
+$ php neptune --secret
 ```
 
 ##### Ready!
