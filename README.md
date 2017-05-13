@@ -23,7 +23,7 @@ $ php neptune --secret
 #
 
 
-### Todos
+### Authors
 
  - Emirhan Engin <whitecode.com2001@gmail.com>
  - Mehmet Ali Peker <maps6134@gmail.com>
