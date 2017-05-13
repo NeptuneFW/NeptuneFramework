@@ -1,4 +1,5 @@
 <?php
+require_once 'secret.php';
 require_once 'init.php';
 
 use System\Application;
