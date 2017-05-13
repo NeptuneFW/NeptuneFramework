@@ -9,6 +9,7 @@ class Application
   public static function get()
   {
     echo 'Çalıştı!';
+    echo 'Nayır çalışmadı!';
   }
   public static function run()
   {
