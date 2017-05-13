@@ -8,13 +8,10 @@ class Application
   }
   public static function get()
   {
-<<<<<<< HEAD
-    echo 'Çalıştı!';
-    echo 'Nayır çalışmadı!';
-=======
-    
->>>>>>> 3333e891650884482f7b0da23fa2eb7dfbcb1bbf
+      echo 'Çalıştı!';
+      echo 'Nayır çalışmadı!';
   }
+  
   public static function run()
   {
 
