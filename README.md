@@ -25,7 +25,7 @@ $ php neptune --secret
 
 ### Todos
 
- - Emirhan Engin <whitecode.com@gmail.com>
+ - Emirhan Engin <whitecode.com2001@gmail.com>
  - Mehmet Ali Peker <maps6134@gmail.com>
 
 License
