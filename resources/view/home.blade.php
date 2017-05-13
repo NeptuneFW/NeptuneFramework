@@ -69,7 +69,7 @@
 <body>
   <div class="general">
     <div class="neptune">
-      {{ \Libs\Languages\Languages::temporarilySet(['en_US' => 'Hello Astronaut! Are you ready to fly to Neptune?', 'tr_TR' => "Merhaba Astronot! Neptune'e uçmaya hazır mısınız?"]) }}
+      {{ \Libs\Languages\Languages::temporarilySet(['en_US' => 'Hello Astronaut! Are you ready to fly to Neptune?', 'tr_TR' => "Merhaba Astronot! Neptune'ye uçmaya hazır mısın?"]) }}
     </div>
     <div class="framework">
       Neptune Framework
