@@ -7,8 +7,12 @@ class HomeController
   {
     echo 'asd';
   }
-  public function profile()
+  public function profile($id)
   {
-    echo 'Profile!';
+    echo 'Profile! ' . $id;
+  }
+  public function test()
+  {
+    echo 'test';
   }
 }

@@ -5,6 +5,6 @@ use Libs\Router\Router;
 
 $app = new Router();
 
-$app->map('HomeController/*', ['profile', 'test']);
+$app->map('HomeController/:str', ['profile', 'test']);
 
 $app->run();
