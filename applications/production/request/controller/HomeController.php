@@ -3,9 +3,9 @@ namespace Applications\Production\Request\Controller;
 
 class HomeController
 {
-  public function index($param)
+  public function index()
   {
-    echo 'asd ali ' . $param;
+    echo 'asd';
   }
   public function profile($id)
   {

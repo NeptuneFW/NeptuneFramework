@@ -5,6 +5,6 @@ use Libs\Router\Router;
 
 $app = new Router();
 
-$app->get('/:param', 'HomeController.index')->regex(':param', '[0-9]+');
+$app->get('/', 'HomeController.index');
 
 $app->run();
