@@ -3,5 +3,5 @@ namespace Libs\Assets;
 
 class Assets
 {
-  
+
 }
