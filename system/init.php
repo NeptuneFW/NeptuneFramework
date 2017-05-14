@@ -12,6 +12,14 @@ $app = new Router();
 
 new Url('/NeptuneFramework');
 
-$app->get('/:id/:b', 'HomeController.index');
+if (opendir('applications/production/routers'))
+{
+  $routes = glob('applications/production/routers/*');
+  array_pop($routes);
+  foreach($routes as $route)
+  {
+    require_once $route;
+  }
+}
 
 $app->run();
