@@ -23,8 +23,13 @@ class ComposerStaticInitf155286662940e537ea1ecbf6a79b5ff
     public static $classMap = array (
         'Libs\\Application\\Application' => __DIR__ . '/../..' . '/libs/application/application.php',
         'Libs\\Arrays\\Arrays' => __DIR__ . '/../..' . '/libs/arrays/arrays.php',
-        'Libs\\Assets\\Assets' => __DIR__ . '/../..' . '/libs/assets/Assets.php',
+        'Libs\\Assets\\Assets' => __DIR__ . '/../..' . '/libs/assets/assets.php',
+        'Libs\\Router\\RouteError' => __DIR__ . '/../..' . '/libs/router/routeError.php',
         'Libs\\Router\\Router' => __DIR__ . '/../..' . '/libs/router/router.php',
+        'Libs\\Url\\Url' => __DIR__ . '/../..' . '/libs/url/url.php',
+        'Libs\\Validator\\ErrorHandler' => __DIR__ . '/../..' . '/libs/validator/errorhandler.php',
+        'Libs\\Validator\\Rules' => __DIR__ . '/../..' . '/libs/validator/validatorrules.php',
+        'Libs\\Validator\\Validator' => __DIR__ . '/../..' . '/libs/validator/validator.php',
     );
 
     public static function getInitializer(ClassLoader $loader)

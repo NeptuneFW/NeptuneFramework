@@ -8,6 +8,11 @@ $baseDir = dirname($vendorDir);
 return array(
     'Libs\\Application\\Application' => $baseDir . '/libs/application/application.php',
     'Libs\\Arrays\\Arrays' => $baseDir . '/libs/arrays/arrays.php',
-    'Libs\\Assets\\Assets' => $baseDir . '/libs/assets/Assets.php',
+    'Libs\\Assets\\Assets' => $baseDir . '/libs/assets/assets.php',
+    'Libs\\Router\\RouteError' => $baseDir . '/libs/router/routeError.php',
     'Libs\\Router\\Router' => $baseDir . '/libs/router/router.php',
+    'Libs\\Url\\Url' => $baseDir . '/libs/url/url.php',
+    'Libs\\Validator\\ErrorHandler' => $baseDir . '/libs/validator/errorhandler.php',
+    'Libs\\Validator\\Rules' => $baseDir . '/libs/validator/validatorrules.php',
+    'Libs\\Validator\\Validator' => $baseDir . '/libs/validator/validator.php',
 );
