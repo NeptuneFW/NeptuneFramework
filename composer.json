@@ -1,8 +1,7 @@
 {
   "autoload": {
     "psr-4": {
-      "Databases\\": "databases",
-      "Classes\\": "classes"
+      "Libs\\": "libs"
     }
   }
 }

@@ -7,32 +7,24 @@ namespace Composer\Autoload;
 class ComposerStaticInitf155286662940e537ea1ecbf6a79b5ff
 {
     public static $prefixLengthsPsr4 = array (
-        'D' => 
+        'L' => 
         array (
-            'Databases\\' => 10,
-        ),
-        'C' => 
-        array (
-            'Classes\\' => 8,
+            'Libs\\' => 5,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'Databases\\' => 
+        'Libs\\' => 
         array (
-            0 => __DIR__ . '/../..' . '/databases',
-        ),
-        'Classes\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/classes',
+            0 => __DIR__ . '/../..' . '/libs',
         ),
     );
 
     public static $classMap = array (
-        'Classes\\Config' => __DIR__ . '/../..' . '/classes/config.class.php',
-        'Classes\\Silm' => __DIR__ . '/../..' . '/classes/silm.class.php',
-        'Classes\\Silmto' => __DIR__ . '/../..' . '/classes/silmto.class.php',
-        'Databases\\UsersTable' => __DIR__ . '/../..' . '/databases/create_users_table.php',
+        'Libs\\Application\\Application' => __DIR__ . '/../..' . '/libs/application/application.php',
+        'Libs\\Arrays\\Arrays' => __DIR__ . '/../..' . '/libs/arrays/arrays.php',
+        'Libs\\Assets\\Assets' => __DIR__ . '/../..' . '/libs/assets/Assets.php',
+        'Libs\\Router\\Router' => __DIR__ . '/../..' . '/libs/router/router.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
