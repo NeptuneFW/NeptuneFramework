@@ -548,19 +548,26 @@ class ". ucfirst($table[0]) . "Table
 ';
 
         $rowFileContent = "<?php
-
 namespace Database\\Databases\\" . ucfirst($database) . ";
 
-/**
-* Created by Neptune Framework.
-* User: Triton
-*/ 
-
-class ". ucfirst($table[0]) . "Row 
+class ". ucfirst($table[0]) . "Row
 {
-
-    public \$triton_".$table[0]."_id = null,  ". $funcArgs['str'] .";        
-
+  public \$triton_".$table[0]."_id = null,  ". $funcArgs['str'] .";
+  public function all()
+  {
+    \$array = [];";
+        foreach($funcArgs as $funcArgKey => $funcArgValue)
+        {
+            if($funcArgKey != 'str' || $funcArgKey == '0')
+            {
+                $rowFileContent .= "if(is_array(\$this->". $funcArgValue . ")) foreach (\$this->". $funcArgValue . " as \$key => \$value) { \$array[\$key]['".$funcArgValue."'] = \$value; }; \r\n        " ;
+            }
+        }
+        $rowFileContent .= "
+    return \$array;
+  }
+    
+    
     public function select(\$index) 
     {      
         \$classRow = new ". $table[0] ."Row();
