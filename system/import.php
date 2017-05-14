@@ -3,12 +3,9 @@
 class Import
 {
     public static function view($fileName, $data = array()){
-        $file = ROOT . DS . 'resources\view' . DS . $fileName . '.view.php';
+        $file = ROOT . DS . 'resources\view' . DS . $fileName . '.blade.php';
         if (file_exists($file)) {
-            if ($data == true) {
-                extract($data);
-            }
-            require $file;
+            echo duncan3dc\Laravel\Blade\Blade::render($fileName, $data);
         }else {
             echo ErrorHandler::show('Belirtilen görüntü dosyası yüklenemedi.');
         }
