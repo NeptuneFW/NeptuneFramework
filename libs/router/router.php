@@ -90,7 +90,14 @@ class Router
         {
           if (method_exists($controller, $params[1]))
           {
-            return call_user_func_array([$controller, $params[1]], $this->matches);
+            if (isset($this->matches))
+            {
+              return call_user_func_array([$controller, $params[1]], $this->matches);
+            }
+            else
+            {
+              die('No routing matches!');
+            }
           }
           else
           {

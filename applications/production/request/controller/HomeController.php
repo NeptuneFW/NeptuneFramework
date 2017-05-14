@@ -5,7 +5,7 @@ class HomeController
 {
   public function index()
   {
-    echo 'asd';
+    // echo 'asd';
   }
   public function profile($id)
   {
