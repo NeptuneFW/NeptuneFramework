@@ -3,5 +3,8 @@
     "psr-4": {
       "Libs\\": "libs"
     }
+  },
+  "require": {
+    "phpmailer/phpmailer": "^5.2"
   }
 }

@@ -6,13 +6,12 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'Libs\\Application\\Application' => $baseDir . '/libs/application/application.php',
-    'Libs\\Arrays\\Arrays' => $baseDir . '/libs/arrays/arrays.php',
-    'Libs\\Assets\\Assets' => $baseDir . '/libs/assets/assets.php',
-    'Libs\\Router\\RouteError' => $baseDir . '/libs/router/routeError.php',
-    'Libs\\Router\\Router' => $baseDir . '/libs/router/router.php',
-    'Libs\\Url\\Url' => $baseDir . '/libs/url/url.php',
-    'Libs\\Validator\\ErrorHandler' => $baseDir . '/libs/validator/errorhandler.php',
-    'Libs\\Validator\\Rules' => $baseDir . '/libs/validator/validatorrules.php',
-    'Libs\\Validator\\Validator' => $baseDir . '/libs/validator/validator.php',
+    'EasyPeasyICS' => $vendorDir . '/phpmailer/phpmailer/extras/EasyPeasyICS.php',
+    'PHPMailer' => $vendorDir . '/phpmailer/phpmailer/class.phpmailer.php',
+    'PHPMailerOAuth' => $vendorDir . '/phpmailer/phpmailer/class.phpmaileroauth.php',
+    'PHPMailerOAuthGoogle' => $vendorDir . '/phpmailer/phpmailer/class.phpmaileroauthgoogle.php',
+    'POP3' => $vendorDir . '/phpmailer/phpmailer/class.pop3.php',
+    'SMTP' => $vendorDir . '/phpmailer/phpmailer/class.smtp.php',
+    'ntlm_sasl_client_class' => $vendorDir . '/phpmailer/phpmailer/extras/ntlm_sasl_client.php',
+    'phpmailerException' => $vendorDir . '/phpmailer/phpmailer/class.phpmailer.php',
 );
