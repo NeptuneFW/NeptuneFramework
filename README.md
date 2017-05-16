@@ -25,7 +25,7 @@ $ php neptune --secret
 
 ### Authors
 
- - Emirhan Engin <whitecode.com2001@gmail.com>
+ - Emirhan Engin <whitekod.com2001@gmail.com>
  - Mehmet Ali Peker <maps6134@gmail.com>
 
 License
