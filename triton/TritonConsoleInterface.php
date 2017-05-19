@@ -93,20 +93,20 @@ class TritonConsoleInterface extends \PDO
 
     public function createTableFile($tableName, $database)
     {
-    $table[0] = $tableName;
-    $connectionSettings = file_get_contents("database/databases/". $database . "/connection.ntconfig");
-    eval("\$connectionSettings = " .$connectionSettings);
-    try
-    {
-        $pdoConnection = new PDO("mysql:host=" . $connectionSettings["host"] . ";dbname=" . $database, $connectionSettings['user'], $connectionSettings['pass']);
-    }
-    catch (PDOException $e)
-    {
-        echo "Üzgünüz... Veritabanı bağlantısı sırasında hata oluştu. Lütfen bağlantı bilgilerinizin doğruluğunu kontrol ediniz <br/> \r\n";
-        echo "Başarılı bir veritabanı bağlantısı olmadığı için Triton devam edemiyor <br/> \r\n";
-        echo "Detaylı Bilgi : <br/> " .  $e->getMessage() . " \r\n";
-        die();
-    }
+        $table[0] = $tableName;
+        $connectionSettings = file_get_contents("database/databases/". $database . "/connection.ntconfig");
+        eval("\$connectionSettings = " .$connectionSettings);
+        try
+        {
+            $pdoConnection = new PDO("mysql:host=" . $connectionSettings["host"] . ";dbname=" . $database, $connectionSettings['user'], $connectionSettings['pass']);
+        }
+        catch (PDOException $e)
+        {
+            echo "Üzgünüz... Veritabanı bağlantısı sırasında hata oluştu. Lütfen bağlantı bilgilerinizin doğruluğunu kontrol ediniz <br/> \r\n";
+            echo "Başarılı bir veritabanı bağlantısı olmadığı için Triton devam edemiyor <br/> \r\n";
+            echo "Detaylı Bilgi : <br/> " .  $e->getMessage() . " \r\n";
+            die();
+        }
         $queryTable = $pdoConnection->prepare('SHOW COLUMNS FROM ' . $table[0]);
         $queryTable->execute();
         $columns = $queryTable->fetchAll();
@@ -624,20 +624,20 @@ class ". ucfirst($table[0]) . "Row
                 \$args = [];
                 ";
 
-                foreach($funcArgs as $funcArgKey => $funcArgValue) {
+        foreach($funcArgs as $funcArgKey => $funcArgValue) {
 
-                    if($funcArgKey != 'str' || $funcArgKey == "0") {
+            if($funcArgKey != 'str' || $funcArgKey == "0") {
 
-                        $rowFileContent .= "\$args['". $funcArgValue ."'] =  \$this->" . $funcArgValue . ";
+                $rowFileContent .= "\$args['". $funcArgValue ."'] =  \$this->" . $funcArgValue . ";
                 " ;
 
-                    }
+            }
 
-                }
-                $rowFileContent .= "
+        }
+        $rowFileContent .= "
                 foreach(\$args as \$funcArgKey => \$funcArgValue) 
                 {
-                    if(!empty(\$funcArgValue)) 
+                    if(!empty(\$funcArgValue) || \$funcArgValue == '0') 
                     {
                         \$insertQueryString .= \" \" . \$funcArgKey . \"= ?,\";
                         \$insertValueArray[] = \$funcArgValue;
@@ -670,7 +670,7 @@ class ". ucfirst($table[0]) . "Row
         $rowFileContent .= "            
                 foreach(\$args as \$funcArgKey => \$funcArgValue) 
                 {
-                    if(!empty(\$funcArgValue)) 
+                    if(!empty(\$funcArgValue) || \$funcArgValue == '0') 
                     {
                         \$insertQueryString .= \" \" . \$funcArgKey . \"= ?,\";
                         \$insertValueArray[] = \$funcArgValue;
