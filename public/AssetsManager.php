@@ -23,7 +23,6 @@ define('SCRIPT_DIR', ROOT . DIRECTORY_SEPARATOR . "public" . DIRECTORY_SEPARATOR
 
 require "../libs/Assets/Assets.php";
 require "../libs/Upload/Upload.php";
-require "../libs/errors/ErrorException.php";
 require "../libs/errors/ErrorHandler.php";
 require "../libs/Validator/Validator.php";
 require "../libs/CSS/CSS.php";
