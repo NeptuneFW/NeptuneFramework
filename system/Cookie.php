@@ -18,15 +18,15 @@ class Cookie
        return self::getAll();
     }
 
-    private function encode($str){
+    private static function encode($str){
         return Crypto::encrypt(serialize(array($str, md5(md5(SECRET)))));
     }
 
-    private function decode($str) {
+    private static function decode($str) {
         return unserialize(Crypto::decrypt($str));
     }
 
-    private function verify($str)
+    private static function verify($str)
     {
         if(self::decode($str)[1] == md5(md5(SECRET))){
             return true;
@@ -48,7 +48,7 @@ class Cookie
             return $_COOKIE[$str];
         }
     }
-    public static function set($key, $value, $client_security = true, $time = 0, $path = '', $domain = '', $secure = false, $http = false) {
+    public static function set($key, $value, $client_security = true, $time = 0, $path = '/', $domain = '', $secure = false, $http = false) {
 
         if($client_security == true) {
             setcookie(self::encode($key), self::encode($value), $time, $path, $domain, $secure, $http);
