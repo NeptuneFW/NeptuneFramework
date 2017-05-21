@@ -76,5 +76,52 @@
             }
         ],
         "description": "PHPMailer is a full-featured email creation and transfer class for PHP"
+    },
+    {
+        "name": "szenis/routing",
+        "version": "v1.1.0",
+        "version_normalized": "1.1.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/stein189/Simple-PHP-Router.git",
+            "reference": "2f29d953c6af8908d5b40d0d65d2f08c5d4511f3"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/stein189/Simple-PHP-Router/zipball/2f29d953c6af8908d5b40d0d65d2f08c5d4511f3",
+            "reference": "2f29d953c6af8908d5b40d0d65d2f08c5d4511f3",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.0"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "4.1.x"
+        },
+        "time": "2016-06-20 17:30:20",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Szenis\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Stein Janssen",
+                "email": "birdmage@gmail.com",
+                "homepage": "http://codehub.nl/",
+                "role": "Creator/Developer"
+            }
+        ],
+        "description": "A small and simple PHP router",
+        "keywords": [
+            "router",
+            "routing"
+        ]
     }
 ]

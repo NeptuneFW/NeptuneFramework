@@ -8,9 +8,9 @@ require_once ROOT . 'vendor\autoload.php';
 use Libs\Router\Router;
 use Libs\Url\Url;
 
-$app = new Router();
-
 new Url('/NeptuneFramework');
+
+$app = new Router();
 
 if (opendir('applications/production/routers'))
 {
@@ -22,4 +22,4 @@ if (opendir('applications/production/routers'))
   }
 }
 
-$app->run();
+$app->dispatch();
