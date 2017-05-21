@@ -1,4 +1,2 @@
 <?php
-$app->make('/', function($request, $response, $service, $app){
-  return $app->annen->name;
-});
+$app->make('/', 'HomeController@index');
