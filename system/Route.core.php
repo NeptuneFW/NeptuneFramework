@@ -151,8 +151,8 @@ class Route
                         }
                     }
                     $call = explode('@', $call);
+					require ROOT . "/app/" . $this->app . "/http/controller/" . $call[0] . '.php';
                     $call[0] = "\\App\\" . $this->app . "\\Http\\Controller\\" . $call[0];
-                    require ltrim($call[0], '\\') . ".php";
                     global $callRoute;
                     array_shift($param);
                     $callRoute = array($call[0], $call[1], $param);
@@ -235,8 +235,8 @@ class Route
                         }
                     }
                     $call = explode('@', $call);
+					require ROOT . "/app/" . $this->app . "/http/controller/" . $call[0] . '.php';
                     $call[0] = "\\App\\" . $this->app . "\\Http\\Controller\\" . $call[0];
-                    require ltrim($call[0], '\\') . ".php";
                     global $callRoute;
                     array_shift($param);
                     $callRoute = array($call[0], $call[1], $param);
@@ -319,8 +319,8 @@ class Route
                         }
                     }
                     $call = explode('@', $call);
+					require ROOT . "/app/" . $this->app . "/http/controller/" . $call[0] . '.php';
                     $call[0] = "\\App\\" . $this->app . "\\Http\\Controller\\" . $call[0];
-                    require ltrim($call[0], '\\') . ".php";
                     global $callRoute;
                     array_shift($param);
                     $callRoute = array($call[0], $call[1], $param);
@@ -403,8 +403,8 @@ class Route
                         }
                     }
                     $call = explode('@', $call);
+					require ROOT . "/app/" . $this->app . "/http/controller/" . $call[0] . '.php';
                     $call[0] = "\\App\\" . $this->app . "\\Http\\Controller\\" . $call[0];
-                    require ltrim($call[0], '\\') . ".php";
                     global $callRoute;
                     array_shift($param);
                     $callRoute = array($call[0], $call[1], $param);
