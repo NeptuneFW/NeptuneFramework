@@ -5,12 +5,15 @@ define('DEFAULT_APP', 'production');
 
 require_once ROOT . 'vendor\autoload.php';
 
-use Libs\Router\Router;
-use Libs\Url\Url;
+use System\Core\Kernel;
+use Applications\Production\Kernel\HttpKernel;
 
-new Url('/NeptuneFramework');
+$httpKernel = new HttpKernel();
+$httpKernel->startKernel();
 
-$app = new Router();
+Kernel::get('url', '/NeptuneFramework');
+
+$app = Kernel::get('route');
 
 if (opendir('applications/production/routers'))
 {

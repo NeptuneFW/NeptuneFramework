@@ -1,6 +1,8 @@
 {
   "autoload": {
     "psr-4": {
+      "System\\": "system",
+      "Applications\\": "applications",
       "Libs\\": "libs"
     }
   },

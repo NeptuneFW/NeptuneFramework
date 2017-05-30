@@ -1,2 +1,2 @@
 <?php
-$app->make('/', 'HomeController@index');
+$app->make('GET', '/', 'HomeController@index');

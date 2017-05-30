@@ -5,6 +5,6 @@ class HomeController
 {
   public function index($request)
   {
-    
+    echo 'run!';
   }
 }

@@ -6,6 +6,8 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'Applications\\Production\\Kernel\\HttpKernel' => $baseDir . '/applications/production/kernel/httpkernel.php',
+    'Applications\\Production\\Request\\Controller\\HomeController' => $baseDir . '/applications/production/request/controller/HomeController.php',
     'EasyPeasyICS' => $vendorDir . '/phpmailer/phpmailer/extras/EasyPeasyICS.php',
     'Libs\\Application\\Application' => $baseDir . '/libs/application/application.php',
     'Libs\\Arrays\\Arrays' => $baseDir . '/libs/arrays/arrays.php',
@@ -18,6 +20,17 @@ return array(
     'Libs\\Router\\DataCollection\\ResponseCookieDataCollection' => $baseDir . '/libs/router/dataCollection/responsecookiecollection.php',
     'Libs\\Router\\DataCollection\\RouteCollection' => $baseDir . '/libs/router/dataCollection/routecollection.php',
     'Libs\\Router\\DataCollection\\ServerDataCollection' => $baseDir . '/libs/router/dataCollection/serverdatacollection.php',
+    'Libs\\Router\\Exceptions\\DispatchHaltedException' => $baseDir . '/libs/router/exceptions/DispatchHaltedException.php',
+    'Libs\\Router\\Exceptions\\DuplicateServiceException' => $baseDir . '/libs/router/exceptions/DuplicateServiceException.php',
+    'Libs\\Router\\Exceptions\\HttpException' => $baseDir . '/libs/router/exceptions/HttpException.php',
+    'Libs\\Router\\Exceptions\\HttpExceptionInterface' => $baseDir . '/libs/router/exceptions/HttpExceptionInterface.php',
+    'Libs\\Router\\Exceptions\\KleinExceptionInterface' => $baseDir . '/libs/router/exceptions/KleinExceptionInterface.php',
+    'Libs\\Router\\Exceptions\\LockedResponseException' => $baseDir . '/libs/router/exceptions/LockedResponseException.php',
+    'Libs\\Router\\Exceptions\\RegularExpressionCompilationException' => $baseDir . '/libs/router/exceptions/RegularExpressionCompilationException.php',
+    'Libs\\Router\\Exceptions\\ResponseAlreadySentException' => $baseDir . '/libs/router/exceptions/ResponseAlreadySentException.php',
+    'Libs\\Router\\Exceptions\\RoutePathCompilationException' => $baseDir . '/libs/router/exceptions/RoutePathCompilationException.php',
+    'Libs\\Router\\Exceptions\\UnhandledException' => $baseDir . '/libs/router/exceptions/UnhandledException.php',
+    'Libs\\Router\\Exceptions\\UnknownServiceException' => $baseDir . '/libs/router/exceptions/UnknownServiceException.php',
     'Libs\\Router\\HttpStatus' => $baseDir . '/libs/router/httpstatus.php',
     'Libs\\Router\\Request' => $baseDir . '/libs/router/request.php',
     'Libs\\Router\\Response' => $baseDir . '/libs/router/response.php',
@@ -75,6 +88,7 @@ return array(
     'PHPMailerOAuthGoogle' => $vendorDir . '/phpmailer/phpmailer/class.phpmaileroauthgoogle.php',
     'POP3' => $vendorDir . '/phpmailer/phpmailer/class.pop3.php',
     'SMTP' => $vendorDir . '/phpmailer/phpmailer/class.smtp.php',
+    'System\\Core\\Kernel' => $baseDir . '/system/core/kernel.php',
     'ntlm_sasl_client_class' => $vendorDir . '/phpmailer/phpmailer/extras/ntlm_sasl_client.php',
     'phpmailerException' => $vendorDir . '/phpmailer/phpmailer/class.phpmailer.php',
 );

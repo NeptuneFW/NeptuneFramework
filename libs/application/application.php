@@ -3,13 +3,16 @@ namespace Libs\Application;
 
 class Application
 {
-  public static function set()
-  {
-    
-  }
-  public static function get()
-  {
+  protected static $application;
 
+  public static function set($app_name, $app_url, $app_security, $app_allowed)
+  {
+    self::$application[] = [
+      'app_name' => $app_name,
+      'app_url' => $app_url,
+      'app_security' => $app_security,
+      'app_allowed' => $app_allowed
+    ];
   }
   public static function run()
   {

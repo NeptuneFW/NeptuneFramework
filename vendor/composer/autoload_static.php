@@ -7,20 +7,38 @@ namespace Composer\Autoload;
 class ComposerStaticInitf155286662940e537ea1ecbf6a79b5ff
 {
     public static $prefixLengthsPsr4 = array (
+        'S' => 
+        array (
+            'System\\' => 7,
+        ),
         'L' => 
         array (
             'Libs\\' => 5,
         ),
+        'A' => 
+        array (
+            'Applications\\' => 13,
+        ),
     );
 
     public static $prefixDirsPsr4 = array (
+        'System\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/system',
+        ),
         'Libs\\' => 
         array (
             0 => __DIR__ . '/../..' . '/libs',
         ),
+        'Applications\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/applications',
+        ),
     );
 
     public static $classMap = array (
+        'Applications\\Production\\Kernel\\HttpKernel' => __DIR__ . '/../..' . '/applications/production/kernel/httpkernel.php',
+        'Applications\\Production\\Request\\Controller\\HomeController' => __DIR__ . '/../..' . '/applications/production/request/controller/HomeController.php',
         'EasyPeasyICS' => __DIR__ . '/..' . '/phpmailer/phpmailer/extras/EasyPeasyICS.php',
         'Libs\\Application\\Application' => __DIR__ . '/../..' . '/libs/application/application.php',
         'Libs\\Arrays\\Arrays' => __DIR__ . '/../..' . '/libs/arrays/arrays.php',
@@ -33,6 +51,17 @@ class ComposerStaticInitf155286662940e537ea1ecbf6a79b5ff
         'Libs\\Router\\DataCollection\\ResponseCookieDataCollection' => __DIR__ . '/../..' . '/libs/router/dataCollection/responsecookiecollection.php',
         'Libs\\Router\\DataCollection\\RouteCollection' => __DIR__ . '/../..' . '/libs/router/dataCollection/routecollection.php',
         'Libs\\Router\\DataCollection\\ServerDataCollection' => __DIR__ . '/../..' . '/libs/router/dataCollection/serverdatacollection.php',
+        'Libs\\Router\\Exceptions\\DispatchHaltedException' => __DIR__ . '/../..' . '/libs/router/exceptions/DispatchHaltedException.php',
+        'Libs\\Router\\Exceptions\\DuplicateServiceException' => __DIR__ . '/../..' . '/libs/router/exceptions/DuplicateServiceException.php',
+        'Libs\\Router\\Exceptions\\HttpException' => __DIR__ . '/../..' . '/libs/router/exceptions/HttpException.php',
+        'Libs\\Router\\Exceptions\\HttpExceptionInterface' => __DIR__ . '/../..' . '/libs/router/exceptions/HttpExceptionInterface.php',
+        'Libs\\Router\\Exceptions\\KleinExceptionInterface' => __DIR__ . '/../..' . '/libs/router/exceptions/KleinExceptionInterface.php',
+        'Libs\\Router\\Exceptions\\LockedResponseException' => __DIR__ . '/../..' . '/libs/router/exceptions/LockedResponseException.php',
+        'Libs\\Router\\Exceptions\\RegularExpressionCompilationException' => __DIR__ . '/../..' . '/libs/router/exceptions/RegularExpressionCompilationException.php',
+        'Libs\\Router\\Exceptions\\ResponseAlreadySentException' => __DIR__ . '/../..' . '/libs/router/exceptions/ResponseAlreadySentException.php',
+        'Libs\\Router\\Exceptions\\RoutePathCompilationException' => __DIR__ . '/../..' . '/libs/router/exceptions/RoutePathCompilationException.php',
+        'Libs\\Router\\Exceptions\\UnhandledException' => __DIR__ . '/../..' . '/libs/router/exceptions/UnhandledException.php',
+        'Libs\\Router\\Exceptions\\UnknownServiceException' => __DIR__ . '/../..' . '/libs/router/exceptions/UnknownServiceException.php',
         'Libs\\Router\\HttpStatus' => __DIR__ . '/../..' . '/libs/router/httpstatus.php',
         'Libs\\Router\\Request' => __DIR__ . '/../..' . '/libs/router/request.php',
         'Libs\\Router\\Response' => __DIR__ . '/../..' . '/libs/router/response.php',
@@ -90,6 +119,7 @@ class ComposerStaticInitf155286662940e537ea1ecbf6a79b5ff
         'PHPMailerOAuthGoogle' => __DIR__ . '/..' . '/phpmailer/phpmailer/class.phpmaileroauthgoogle.php',
         'POP3' => __DIR__ . '/..' . '/phpmailer/phpmailer/class.pop3.php',
         'SMTP' => __DIR__ . '/..' . '/phpmailer/phpmailer/class.smtp.php',
+        'System\\Core\\Kernel' => __DIR__ . '/../..' . '/system/core/kernel.php',
         'ntlm_sasl_client_class' => __DIR__ . '/..' . '/phpmailer/phpmailer/extras/ntlm_sasl_client.php',
         'phpmailerException' => __DIR__ . '/..' . '/phpmailer/phpmailer/class.phpmailer.php',
     );
